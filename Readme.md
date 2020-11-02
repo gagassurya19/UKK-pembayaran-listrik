@@ -3,6 +3,8 @@ Tugas akhir backend (nodeJS)
 
 Youtube: [Explanation](https://youtu.be/wX33If-gdWc)
 
+![DB](https://raw.githubusercontent.com/gagassurya19/UKK-pembayaran-listrik/main/db.png)
+
 ## Level
 ```
 sequelize model:create --name level --attributes nama_level:string

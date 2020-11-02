@@ -1,7 +1,7 @@
 # UKK Pembayaran Listrik
 Tugas akhir backend (nodeJS)
 
-Youtube: [Explanation](https://youtu.be/wX33If-gdWc)
+Youtube: [Explanation](https://youtu.be/wX33If-gdWc) [ngoding santuy](https://youtu.be/LZWiKHOhA50)
 
 ![DB](https://raw.githubusercontent.com/gagassurya19/UKK-pembayaran-listrik/main/db.png)
 

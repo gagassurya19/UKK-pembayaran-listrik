@@ -11,9 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.level, {
+        foreignKey: 'id_level',
+        as: 'level'
+      })
     }
   };
   admin.init({
+    id_admin: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     nama_admin: DataTypes.STRING,
@@ -21,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'admin',
+    tableName: 'admin'
   });
   return admin;
 };

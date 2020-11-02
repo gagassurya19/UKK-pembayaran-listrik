@@ -14,11 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   tarif.init({
+    id_tarif: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+      autoIncrement: true
+    },
     daya: DataTypes.STRING,
     tarifperkwh: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'tarif',
+    tableName: 'tarif'
   });
   return tarif;
 };

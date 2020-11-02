@@ -11,9 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.pelanggan, {
+        foreignKey: 'id_pelanggan',
+        as: 'pelanggan'
+      })
     }
   };
   penggunaan.init({
+    id_penggunaan: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
     id_pelanggan: DataTypes.INTEGER,
     bulan: DataTypes.STRING,
     tahun: DataTypes.STRING,
@@ -22,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'penggunaan',
+    tableName: 'penggunaan'
   });
   return penggunaan;
 };

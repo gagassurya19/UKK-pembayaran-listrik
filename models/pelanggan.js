@@ -11,9 +11,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // inisisasi foreignkey (id_tarif)
+      this.belongsTo(models.tarif, {
+        foreignKey: 'id_tarif',
+        as: 'tarif'
+      })
     }
   };
   pelanggan.init({
+    id_pelanggan: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+      autoIncrement: true
+    },
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     nomor_kwh: DataTypes.STRING,
@@ -23,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'pelanggan',
+    tableName: 'pelanggan'
   });
   return pelanggan;
 };

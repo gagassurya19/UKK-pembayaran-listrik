@@ -14,10 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   level.init({
+    id_level: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+      autoIncrement: true
+    },
     nama_level: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'level',
+    tableName: 'level'
   });
   return level;
 };

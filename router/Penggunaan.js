@@ -7,8 +7,14 @@ const penggunaan = require('../models/index').penggunaan
 // middleware req body 
 app.use(express.urlencoded({ extended:true }))
 
+// auth
+const verifyToken = require('./VerifyToken')
+app.use(verifyToken)
+
 app.get('/', async (req, res) => {
-    penggunaan.findAll() // get data
+    penggunaan.findAll({
+        include: [{ all: true, nested: true }]
+    }) // get data
     .then(result => {
         res.json(result)
     })

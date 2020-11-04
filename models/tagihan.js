@@ -24,7 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       allowNull: false
     },
-    id_penggunaan: DataTypes.INTEGER,
+    id_penggunaan: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     bulan: DataTypes.STRING,
     tahun: DataTypes.STRING,
     jumlah_meter: DataTypes.FLOAT,

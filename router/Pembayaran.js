@@ -4,7 +4,6 @@ const app = express()
 
 // date
 let date = new Date()
-let dateNow = date.toISOString().slice(0,10).split("-",3)
 
 // call model pembayaran
 const pembayaran = require('../models/index').pembayaran
@@ -32,8 +31,14 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 // ----------------------------------------------------
 
+// auth
+const verifyToken = require('./VerifyToken')
+app.use(verifyToken)
+
 app.get('/', async (req, res) => {
-    pembayaran.findAll() // get data
+    pembayaran.findAll({
+        include:[{ all: true, nested: true }]
+    }) // get data
     .then(result => {
         res.json(result)
     })
@@ -47,7 +52,7 @@ app.get('/', async (req, res) => {
 app.post('/', upload.single('bukti'), async (req, res) => {
     let data = {
         id_tagihan: req.body.id_tagihan,
-        tanggal_pembayaran: dateNow[2],
+        tanggal_pembayaran: date,
         bulan_bayar: req.body.bulan_bayar,
         biaya_admin: req.body.biaya_admin,
         total_bayar: req.body.total_bayar,

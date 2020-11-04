@@ -1,12 +1,15 @@
 const { urlencoded } = require('express')
 const express = require('express')
 const app = express()
-const md5 = require('md5')
 
 // call model tarif
 const tarif = require('../models/index').tarif
 // middleware req body 
 app.use(express.urlencoded({ extended:true }))
+
+// auth
+const verifyToken = require('./VerifyToken')
+app.use(verifyToken)
 
 app.get('/', async (req, res) => {
     tarif.findAll() // get data

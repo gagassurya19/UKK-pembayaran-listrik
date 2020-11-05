@@ -2,8 +2,9 @@ const { urlencoded } = require('express')
 const express = require('express')
 const app = express()
 
-// call model tagihan
+// call model
 const tagihan = require('../models/index').tagihan
+const penggunaan = require('../models/index').penggunaan
 // middleware req body 
 app.use(express.urlencoded({ extended:true }))
 
@@ -26,13 +27,20 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/', async (req, res) => {
+    let param = { id_penggunaan: req.body.id_penggunaan }
+
+    // auto calculation jumlah_meter
+    let dataPenggunaan = await penggunaan.findOne({ where: param })
+    let jumlahMeter = dataPenggunaan.meter_akhir - dataPenggunaan.meter_awal
+
     let data = {
-        id_penggunaan: req.body.id_penggunaan,
+        id_penggunaan: param.id_penggunaan,
         bulan: req.body.bulan,
         tahun: req.body.tahun,
-        jumlah_meter: req.body.jumlah_meter,
+        jumlah_meter: jumlahMeter,
         status: req.body.status
     }
+
     tagihan.create(data)
     .then(result => {
         res.json({

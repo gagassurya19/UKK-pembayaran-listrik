@@ -10,6 +10,7 @@ let admin = require('./router/Admin')
 let level = require('./router/Level')
 let tarif = require('./router/Tarif')
 let auth = require('./router/Auth')
+let verifyPembayaran = require('./router/VerifyPembayaran')
 
 // use router
 app.use('/pelanggan', pelanggan)
@@ -20,6 +21,7 @@ app.use('/admin', admin)
 app.use('/level', level)
 app.use('/tarif', tarif)
 app.use('/auth', auth)
+app.use('/verifypembayaran', verifyPembayaran)
 
 app.listen(8000, () => {
     console.log("Ngacir Cuy!");

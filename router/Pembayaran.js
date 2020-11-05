@@ -5,8 +5,9 @@ const app = express()
 // date
 let date = new Date()
 
-// call model pembayaran
+// call model
 const pembayaran = require('../models/index').pembayaran
+const tagihan = require('../models/index').tagihan
 // middleware req body 
 app.use(express.urlencoded({ extended:true }))
 
@@ -60,6 +61,12 @@ app.post('/', upload.single('bukti'), async (req, res) => {
         bukti: req.file.filename,
         id_admin: req.body.id_admin
     }
+
+    // change status tagihan to true
+    let idTagihan = { id_tagihan: data.id_tagihan }
+    let status = { status: 1 }
+    tagihan.update(status, { where: idTagihan })
+    
     pembayaran.create(data)
     .then(result => {
         res.json({
